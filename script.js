@@ -1,48 +1,66 @@
+// Function to toggle display of create form
 function showCreateForm() {
     var createForm = document.getElementById('createForm');
     if (createForm.style.display === 'none') {
-createForm.style.display = 'block';
-} else {
-createForm.style.display = 'none';
+        createForm.style.display = 'block';
+    } else {
+        createForm.style.display = 'none';
+    }
 }
+
+// Function to fetch existing items from server
+function fetchItems() {
+    fetch('crud.php')
+        .then(response => response.json())
+        .then(data => {
+            addItemsToDOM(data);
+        })
+        .catch(error => console.error('Error fetching items:', error));
 }
 
+// Function to add new item
+document.getElementById('addItemForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
+    var formData = new FormData(this);
 
-// Simulated data for existing items (replace with actual dynamic data)
-var existingItems = [
-    { id: 1, name: 'Item 1', type: 'Type A', notes: 'Some notes about Item 1', image: 'item1.jpg' },
-    { id: 2, name: 'Item 2', type: 'Type B', notes: 'Some notes about Item 2', image: 'item2.jpg' }
-    // Add more items as needed
-];
+    fetch('crud.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        addNewItemToDOM(data);
+        document.getElementById('addItemForm').reset(); // Reset form after submission
+    })
+    .catch(error => console.error('Error adding item:', error));
+});
 
-// Function to add items to the DOM
-function addItemsToDOM() {
+// Function to add new item to DOM dynamically
+function addNewItemToDOM(item) {
     var crudItemsDiv = document.getElementById('crudItems');
-    crudItemsDiv.innerHTML = ''; // Clear previous content
 
-    existingItems.forEach(function(item) {
-        var itemHtml = `
-            <div class="crud-item">
-                <img src="${item.image}" alt="Item Image">
-                <div class="crud-item-details">
-                    <p><strong>Name:</strong> ${item.name}</p>
-                    <p><strong>Type:</strong> ${item.type}</p>
-                    <p><strong>ID:</strong> #${item.id}</p>
-                    <p><strong>Notes:</strong> ${item.notes}</p>
-                </div>
-                <div class="edit-delete-buttons">
-                    <button onclick="editItem(${item.id})">Edit</button>
-                    <button onclick="deleteItem(${item.id})">Delete</button>
-                </div>
+    var itemHtml = `
+        <div class="crud-item">
+            <img src="${item.image}" alt="Item Image">
+            <div class="crud-item-details">
+                <p><strong>Name:</strong> ${item.name}</p>
+                <p><strong>Type:</strong> ${item.type}</p>
+                <p><strong>Age:</strong> ${item.age}</p>
+                <p><strong>Notes:</strong> ${item.notes}</p>
             </div>
-        `;
-        crudItemsDiv.innerHTML += itemHtml;
-    });
+            <div class="edit-delete-buttons">
+                <button onclick="editItem(${item.id})">Edit</button>
+                <button onclick="deleteItem(${item.id})">Delete</button>
+            </div>
+        </div>
+    `;
+
+    crudItemsDiv.innerHTML += itemHtml;
 }
 
-// Initial call to populate existing items
-addItemsToDOM();
+// Initial fetch of items on page load
+fetchItems();
 
 // Placeholder functions for edit and delete (to be implemented)
 function editItem(itemId) {

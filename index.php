@@ -24,16 +24,22 @@
             <!-- Create Form (Initially Hidden) -->
             <div id="createForm" style="display: none;">
                 <h2>Create New Item</h2>
-                <form action="process_create.php" method="POST" enctype="multipart/form-data">
+                <form action="crud.php" method="POST" enctype="multipart/form-data">
                     <label for="image">Image:</label>
                     <input type="file" id="image" name="image"><br>
+
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name"><br>
+
                     <label for="type">Type:</label>
                     <input type="text" id="type" name="type"><br>
+
+                    <label for="age">age:</label>
+                    <input type="number" id="age" name="age"><br>
+                    
                     <label for="notes">Notes:</label><br>
                     <textarea id="notes" name="notes" rows="4" cols="50"></textarea><br>
-                    <button type="submit">Create</button>
+                    <button type="submit"><a href=" "></a>Create</button>
                 </form>
             </div>
 
