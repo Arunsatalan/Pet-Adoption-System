@@ -35,55 +35,24 @@
                     <p><strong>Name:</strong> John Doe</p>
                     <p><strong>Email:</strong> johndoe@example.com</p>
                 </div>
-                <button onclick="showCreateForm()">Create New Item</button>
+
+                <a href="list_pet_form.php" class="button-link">
+                    <button>Create New Item</button>
+                </a>
             </section>
 
             <!-- CRUD Section -->
             <section class="crud-section" id="crudSection">
                 <!-- Create Form (Initially Hidden) -->
                 <div id="createForm" style="display: none;">
-                    <h2>Create New Item</h2>
+                    <h2 id="formTitle">Create New Item</h2>
                     <form id="createItemForm" enctype="multipart/form-data">
-                        <label for="image">Image:</label>
-                        <input type="file" id="image" name="image" required><br>
-
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required><br>
-
-                        <label for="type">Type:</label>
-                        <input type="text" id="type" name="type" required><br>
-
-                        <label for="age">Age:</label>
-                        <input type="number" id="age" name="age" required><br>
-                        
-                        <label for="notes">Notes:</label><br>
-                        <textarea id="notes" name="notes" rows="4" cols="50"></textarea><br>
-                        <button type="submit">Create</button>
+                        <!-- Form fields will be dynamically added here -->
+                        <button type="submit">Save Changes</button>
                     </form>
                 </div>
 
-                <!-- Edit Form (Initially Hidden) -->
-                <div id="editForm" style="display: none;">
-                    <h2>Edit Item</h2>
-                    <form id="editItemForm" enctype="multipart/form-data">
-                        <input type="hidden" id="editId" name="id">
-                        <label for="editImage">Image:</label>
-                        <input type="file" id="editImage" name="image"><br>
-
-                        <label for="editName">Name:</label>
-                        <input type="text" id="editName" name="name" required><br>
-
-                        <label for="editType">Type:</label>
-                        <input type="text" id="editType" name="type" required><br>
-
-                        <label for="editAge">Age:</label>
-                        <input type="number" id="editAge" name="age" required><br>
-                        
-                        <label for="editNotes">Notes:</label><br>
-                        <textarea id="editNotes" name="notes" rows="4" cols="50"></textarea><br>
-                        <button type="submit">Update</button>
-                    </form>
-                </div>
+                <div id="editFormContainer"></div>
 
                 <!-- Already Created Items Section -->
                 <div id="crudItems">
